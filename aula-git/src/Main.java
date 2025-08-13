@@ -1,22 +1,71 @@
 import java.util.Scanner;
 
 public class Main {
+    public static VetorEstastico vetor;
+
     public static void main(String[] args) {
-        Scanner teclado = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
 
-        System.out.print("\nInforme seu nome: ");
-        String nome = teclado.nextLine();
+        while (true) {
+            System.out.println("\nBem vindo!");
+            System.out.println("\nSelecione a opção desejada");
+            System.out.println("[1] Novo Vetor");
+            System.out.println("[2] Percorrer vetor");
+            System.out.println("[3] Buscar item pelo id");
+            System.out.println("[4] Quantidade de itens no vetor");
+            System.out.println("[5] Sair");
 
-        System.out.print("Sua idade: ");
-        int idade = Integer.parseInt(teclado.nextLine());
+            System.out.print("\nOpção: ");
+            int opcao = scanner.nextInt();
 
-        if(idade >= 18) {
-            System.out.println("\nAcesso permitido, " + nome + "!");
-            System.out.println("Você é maior de idade há " + (idade-18) + " ano(s)!");
+            switch (opcao) {
+                case 1:
+                    novoVetor();
+                    break;
+                case 2:
+                    vetor.percorrer();
+                    break;
+                case 3:
+                    System.out.print("\nid: ");
+                    int id = scanner.nextInt();
+                    vetor.buscarPeloId(id).imprimir();
+                    break;
+                case 4:
+                    System.out.println("O vetor possui "+vetor.quantidade()+" itens");
+                    break;
+                case 5:
+                    return;
+            }
         }
-        else {
-            System.out.println("\nAcesso negado, " + nome + "!");
-            System.out.println("Você é menor de idade, volte em " + (18-idade) + " ano(s)!");
+    }
+
+    public static void novoVetor() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Informe o tamanho do vetor: ");
+        int tamanho = scanner.nextInt();
+
+        vetor = new VetorEstastico(tamanho);
+
+        for (int i=0; i < tamanho; i++) {
+            System.out.println("\n---------------------------");
+            System.out.println((i+1)+" º Item");
+
+            System.out.print("Informe o id: ");
+            int id = scanner.nextInt();
+
+            System.out.print("Informe o nome: ");
+            String nome = scanner.next();
+
+            System.out.print("Informe o valor: R$");
+            double valor = scanner.nextInt();
+
+            ExemploObjeto novo = new ExemploObjeto(id, nome, valor);
+            vetor.adicionarItem(novo);
+
+            System.out.println("Item ["+id+"] adicionado com sucesso!");
         }
+
+        System.out.println("\n\nTodos os itens adicionados!");
     }
 }
