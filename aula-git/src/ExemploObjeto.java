@@ -17,11 +17,11 @@ public class ExemploObjeto {
         return this.nome;
     }
 
-    public double getvalor() {
+    public double getValor() {
         return this.valor;
     }
-    
+
     public void imprimir() {
-        System.out.println(this.id + " | " + this.nome + " | " + this.valor + " ano(s)");
+        System.out.println(this.id + " | " + this.nome + " | R$ " + this.valor);
     }
 }

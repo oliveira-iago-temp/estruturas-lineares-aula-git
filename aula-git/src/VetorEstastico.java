@@ -1,22 +1,28 @@
 public class VetorEstastico {
     private ExemploObjeto[] vetor;
+    private int quantidadeItens;
 
     public VetorEstastico(int tamanhoVetor) {
         this.vetor = new ExemploObjeto[tamanhoVetor];
+        this.quantidadeItens = 0;
     }
 
     public void adicionarItem(ExemploObjeto objeto) {
-        this.vetor[this.vetor.length-1] = objeto;
+        if (quantidadeItens < vetor.length) {
+            this.vetor[quantidadeItens] = objeto;
+            quantidadeItens++;
+        } else {
+            System.out.println("Vetor cheio. Não é possível adicionar mais itens.");
+        }
     }
 
     public int quantidade() {
-        return this.vetor.length;
+        return this.quantidadeItens;
     }
 
     public ExemploObjeto buscarPeloId(int id) {
-        //Percorre cada item do vetor
-        for (int i = 0; i < this.vetor.length; i++) {
-            if(this.vetor[i].getId() == id) {
+        for (int i = 0; i < quantidadeItens; i++) {
+            if (this.vetor[i].getId() == id) {
                 return this.vetor[i];
             }
         }
@@ -24,7 +30,11 @@ public class VetorEstastico {
     }
 
     public void percorrer() {
-        for (int i = 0; i < this.vetor.length; i++) {
+        if (quantidadeItens == 0) {
+            System.out.println("Vetor vazio.");
+            return;
+        }
+        for (int i = 0; i < quantidadeItens; i++) {
             this.vetor[i].imprimir();
         }
     }
